@@ -1,0 +1,149 @@
+#include <iostream> 
+#include <string> 
+
+
+using namespace std;
+
+string drinkA(char a)
+
+{
+
+    if ((a == 'A') || (a == 'a'))
+    {
+        return "Coffee";
+    }
+    else
+    {
+        return "Tea";
+    }
+}
+
+string Drink(char b)
+
+{
+
+    switch (b)
+    {
+    case 'a':
+    case 'A':
+        return "Ice";
+        break;
+    case 'b':
+    case 'B':
+        return "Milk";
+        break;
+    case 'C':
+    case 'c':
+        return "Black";
+        break;
+    }
+}
+
+int Cost(char c)
+
+{
+
+    switch (c)
+    {
+    case 'a':
+    case 'A':
+        return 3;
+        break;
+    case 'b':
+    case 'B':
+        return 2;
+        break;
+    case 'C':
+    case 'c':
+        return 1;
+        break;
+    }
+}
+int main()
+{
+    string Drinks[4][4] = {
+    {"Coffee", "Tea",},
+    {"Ice coffee price:", "3", "Ice tea price: ", "3"},
+    {"Milk coffee price:", "2", "Milk tea price: ", "2"},
+    {"Black coffee price:", "1", "Black tea price: ", "1"}
+    };
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            cout << Drinks[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << "Please enter your money: ";
+       double money;
+          cin >> money;
+    while (cin.fail()) {
+
+        cout << "Invalid input. Please try again: " << endl;
+
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cin >> money;
+    }
+    bool incorrect = true;
+    while (incorrect)
+    {
+          cout << "You have: " << money << " dirhams" << endl << endl;
+            cout << "A.Coffee" << endl;
+                cout << "B.Tea" << endl << endl;
+
+
+              cout << "Kindly select the drink of your choice: ";
+            char drink;
+          cin >> drink;
+              cout << "A. Ice" << endl;
+                 cout << "B. Milk" << endl;
+                   cout << "C. Black" << endl << endl;
+
+
+                cout << "Kindly select the drink type of your choice: ";
+              char type;
+            cin >> type;
+          cout << "Would you like to add some sugar? Y/N:" << endl << endl;
+            char sugar;
+              cin >> sugar;
+
+
+            switch (sugar)
+           {
+        case 'y':
+            case 'Y':
+                cout << "Your selection: " << Drink(type) << " " << drinkA(drink) << " with sugar" << ". The price would be: " << Cost(type) << " AED." << endl;
+            break;
+        case 'n':
+            case 'N':
+                cout << "Your selection: " << Drink(type) << " " << drinkA(drink) << " without sugar" << ". The price would be: " << Cost(type) << " AED." << endl;
+            break;
+        }
+
+
+        cout << "Is this correct? (Y/N):";
+        char x;
+        cin >> x;
+        switch (x)
+        {
+        case 'y':
+        case 'Y':
+            incorrect = false;
+            break;
+        default:
+            break;
+        }
+        if (money < Cost(type))
+        {
+            cout << "Unfortunately, you cannot afford this drink." << endl;
+        }
+        else
+        {
+            cout << "Your change is: " << money - Cost(type) << " AED." << endl << endl;
+        }
+    }
+
+
+    cout << "A warm thank you for using this vending machine!";
+    return 0;
+}
